@@ -50,9 +50,19 @@ h1 {
   line-height: 1.1;
 }
 
-h2 {
+
+
+h3 {
   font-size: 2.4em;
   line-height: 1.1;
+  margin: 0;
+  padding: 0;
+
+  & a svg {
+    width: 12px;
+    height: 12px;
+    translate: 0 -0.55em;
+  }
 }
 
 button {

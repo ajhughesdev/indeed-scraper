@@ -1,12 +1,14 @@
-import { useState } from 'react';
-import Results from './Results';
+import { useState } from 'react'
+import Results from './Results'
+import Favorites from './Favorites'
 
 const App = () => {
-  const [query, setQuery] = useState('');
-  const [location, setLocation] = useState('');
-  const [jobs, setJobs] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [query, setQuery] = useState('')
+  const [location, setLocation] = useState('')
+  const [jobs, setJobs] = useState([])
+  const [favorites, setFavorites] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState(null)
 
   const handleSearch = (e) => {
     e.preventDefault()
@@ -33,7 +35,6 @@ const App = () => {
           .then((data) => {
             setJobs(data)
             setIsLoading(false)
-            console.log('Here are the jobs', data)
           })
           .catch(((error) => {
             console.error(error)
@@ -62,10 +63,26 @@ const App = () => {
           /></label>
         <button onClick={handleSearch}>Submit</button>
       </div>
+      <div className='favorites'>
+        <button onClick={() => {
+          setIsLoading(true)
+          fetch('http://127.0.0.1:5000/api/favorites')
+            .then((response) => response.json())
+            .then((data) => {
+              setFavorites(data)
+              setIsLoading(false)
+            })
+            .catch(((error) => {
+              setError(error)
+              setIsLoading(false)
+            }))
+        }}>Favorites</button>
+      </div>
       {isLoading && <p>Loading...</p>}
       {jobs.length > 0 && <Results jobs={jobs} />}
+      {favorites.length > 0 && <Favorites favorites={favorites} />}
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App
