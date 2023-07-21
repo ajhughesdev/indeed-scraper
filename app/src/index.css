@@ -1,3 +1,5 @@
+@import 'the-new-css-reset';
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -34,6 +36,53 @@ body {
   flex-direction: column;
 }
 
+.result {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.modal {
+  width: 90vw;
+  max-width: 20rem;
+
+  padding: 1em;
+
+  background: #fff;
+  color: #656e77;
+  box-shadow: 0 0 5px rgba(101, 110, 119, 0.2);
+  border: 0;
+  text-align: center;
+}
+
+.modal[open] {
+  animation: 0.2s linear slidein;
+}
+
+.modal::backdrop {
+  background: rgba(224, 228, 232, 0.9);
+  animation: 0.4s ease fade;
+}
+
+@keyframes slidein {
+  from {
+    transform: translate3d(0, 5px, 0);
+  }
+  to {
+    transfrom: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -49,8 +98,6 @@ h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
-
-
 
 h3 {
   font-size: 2.4em;
@@ -99,4 +146,70 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.result {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+/* Button */
+.btn {
+  margin: 0;
+  padding: 1em 2em;
+
+  line-height: 1;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #fff;
+  background: #50aaff;
+  border: 0;
+  font-weight: bold;
+}
+
+.btn--inline {
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+
+.btn--close {
+  background: #ff8282;
+}
+
+/* Dialog */
+.modal {
+  width: 90vw;
+  max-width: 20rem;
+
+  padding: 1em;
+
+  background: #fff;
+  color: #656e77;
+  box-shadow: 0 0 5px rgba(101, 110, 119, 0.2);
+  border: 0;
+  text-align: center;
+}
+
+.modal[open] {
+  animation: 0.2s linear slidein;
+}
+
+.modal::backdrop {
+  background: rgba(224, 228, 232, 0.9);
+  animation: 0.4s ease fade;
+}
+
+.dialog__title {
+  color: #50aaff;
+}
+
+.dialog__txt {
+}
+
+.dialog__btn {
+  display: block;
+  width: 100%;
+  margin-top: 2rem;
 }

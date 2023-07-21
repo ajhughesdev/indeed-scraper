@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import css from './results.module.css'
 
 export const FavoriteButton = ({ job_id, initialIsFavorite }) => {
   const [isFavorite, setIsFavorite] = useState(initialIsFavorite)
@@ -9,22 +8,23 @@ export const FavoriteButton = ({ job_id, initialIsFavorite }) => {
   }, [initialIsFavorite])
 
   const handleFavorite = async () => {
-    await fetch(`http://127.0.0.1:5000/api/favorites/${job_id}`, {
+    const updatedFavoriteStatus = !isFavorite
+    await fetch(`${API_ENDPOINT}/api/favorites/${job_id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        isFavorite: !isFavorite
+        isFavorite: updatedFavoriteStatus
       })
     })
-    setIsFavorite(!isFavorite)
+    setIsFavorite(updatedFavoriteStatus)
   }
 
   return (
     <button
       onClick={handleFavorite}
-      className={css.favorite}
+      className='favorite'
     >
       {isFavorite ? '★' : '☆'}
     </button>
@@ -37,7 +37,7 @@ const Results = ({ jobs }) => {
     <>
       <h2>Results</h2>
       {jobs.map((job) => (
-        <article className={css.result}>
+        <article className='result'>
           <div className='favs'>
             <FavoriteButton job_id={job.id} initialIsFavorite={job.isFavorite} />
           </div>
@@ -50,7 +50,7 @@ const Results = ({ jobs }) => {
             <p>{job.location}</p>
             <p>Salary: {!job.salary ? 'Not provided' : job.salary}</p>
           </div>
-        </article>
+        </article >
       ))}
     </>
   )
