@@ -1,7 +1,7 @@
 @import 'the-new-css-reset';
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -20,18 +20,18 @@ a {
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
-}
 
-a:hover {
-  color: #535bf2;
+  &:hover {
+    color: #535bf2;
+  }
 }
 
 body {
-  margin: 0;
+  margin: auto;
   display: flex;
   place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  width: 960px;
+  min-height: 100dvh;
   padding-inline: 2rem;
   flex-direction: column;
 }
@@ -43,32 +43,11 @@ body {
   align-items: start;
 }
 
-.modal {
-  width: 90vw;
-  max-width: 20rem;
-
-  padding: 1em;
-
-  background: #fff;
-  color: #656e77;
-  box-shadow: 0 0 5px rgba(101, 110, 119, 0.2);
-  border: 0;
-  text-align: center;
-}
-
-.modal[open] {
-  animation: 0.2s linear slidein;
-}
-
-.modal::backdrop {
-  background: rgba(224, 228, 232, 0.9);
-  animation: 0.4s ease fade;
-}
-
 @keyframes slidein {
   from {
     transform: translate3d(0, 5px, 0);
   }
+
   to {
     transfrom: translate3d(0, 0, 0);
   }
@@ -78,29 +57,53 @@ body {
   from {
     opacity: 0.3;
   }
+
   to {
     opacity: 1;
   }
 }
 
-.form {
+form {
   display: flex;
   flex-direction: column;
+  width: 420px;
+  margin-inline: auto;
   gap: 1rem;
+  margin-block-start: 2rem;
 
   & label {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     justify-content: space-between;
+    align-items: center;
+
+    & input {
+      width: 100%;
+      padding-inline-start: 1rem;
+      padding-block: .5rem;
+      border: 1px solid grey;
+      border-radius: 4px;
+
+    }
   }
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 3.2rem;
   line-height: 1.1;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+h2 {
+  font-size: 2.4rem;
+  line-height: 1.1;
+  font-weight: 700;
 }
 
 h3 {
-  font-size: 2.4em;
+  font-size: 2.4rem;
   line-height: 1.1;
   margin: 0;
   padding: 0;
@@ -108,65 +111,23 @@ h3 {
   & a svg {
     width: 12px;
     height: 12px;
-    translate: 0 -0.55em;
+    translate: 0 -0.55rem;
   }
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-
-button:hover {
-  border-color: #646cff;
-}
-
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-
-  a:hover {
-    color: #747bff;
-  }
-
-  button {
-    background-color: #f9f9f9;
-  }
-}
-
-.result {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 1rem;
-  align-items: start;
-}
 
 /* Button */
 .btn {
-  margin: 0;
-  padding: 1em 2em;
-
+  background: lightgrey;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  text-align: center;
   line-height: 1;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.15rem;
   text-transform: uppercase;
-  color: #fff;
-  background: #50aaff;
+  color: #bd34fe;
   border: 0;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .btn--inline {
@@ -175,21 +136,29 @@ button:focus-visible {
 }
 
 .btn--close {
-  background: #ff8282;
+  background: darkgrey;
 }
 
 /* Dialog */
 .modal {
-  width: 90vw;
-  max-width: 20rem;
-
-  padding: 1em;
-
+  padding: 1rem;
   background: #fff;
   color: #656e77;
   box-shadow: 0 0 5px rgba(101, 110, 119, 0.2);
   border: 0;
-  text-align: center;
+  border-radius: 8px;
+  /* max-width: 640px; */
+  height: 400px;
+  display: grid;
+  grid-template-areas:
+    'heading button'
+    'content content';
+  gap: 1rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
 }
 
 .modal[open] {
@@ -197,7 +166,7 @@ button:focus-visible {
 }
 
 .modal::backdrop {
-  background: rgba(224, 228, 232, 0.9);
+  background: rgb(0 0 0 / .65);
   animation: 0.4s ease fade;
 }
 
@@ -205,11 +174,12 @@ button:focus-visible {
   color: #50aaff;
 }
 
-.dialog__txt {
-}
 
 .dialog__btn {
-  display: block;
-  width: 100%;
-  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 15px;
+  border-radius: 50%;
+  float: right;
 }
